@@ -34,7 +34,7 @@ final class MockableTests: XCTestCase {
         let expandedSource = #"""
             \#(commonSource)
             public class _Mock_TestProtocol_: TestProtocol , MockTrackable {
-                public var _mock_tracker_ = Mock.Tracker(functionSignatures: ["foo()", "foo() -> Int", "foo(Int, Double) -> Double",])
+                public var _mock_tracker_ = Mock.Tracker(functionSignatures: ["foo()", "foo()->Int", "foo(Int,Double)->Double",])
                 public var x: Double
                 public var y: Double
                 public init(_ x: Double , _ y: Double ) {
@@ -49,7 +49,7 @@ final class MockableTests: XCTestCase {
                     trace.calls.append(())
                 }
                 public func foo() -> Int {
-                    let signature = "foo() -> Int"
+                    let signature = "foo()->Int"
                     guard let trace = _mock_tracker_.trace[signature] else {
                         fatalError("Mock function required for \(signature)")
                     }
@@ -60,7 +60,7 @@ final class MockableTests: XCTestCase {
                     return result
                 }
                 public func foo(_ p1: Int, p2: Double) -> Double {
-                    let signature = "foo(Int, Double) -> Double"
+                    let signature = "foo(Int,Double)->Double"
                     guard let trace = _mock_tracker_.trace[signature] else {
                         fatalError("Mock function required for \(signature)")
                     }

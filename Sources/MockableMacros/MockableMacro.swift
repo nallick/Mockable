@@ -4,6 +4,7 @@
 //  Copyright © 2023 Purgatory Design. Licensed under the MIT License.
 //
 
+import Foundation
 import SwiftDiagnostics
 import SwiftSyntax
 import SwiftSyntaxBuilder
@@ -161,8 +162,8 @@ extension MockableMacro {
 extension FunctionDeclSyntax {
 
     public var mockSignature: String {
-        let inputSignature = signature.input.parameterList.map({ $0.type.description }).joined(separator: ", ")
-        let outputSignature = (signature.output?.description).map { " " + $0 } ?? ""
+        let inputSignature = signature.input.parameterList.map({ $0.type.description }).joined(separator: ",")
+        let outputSignature = signature.output?.description.components(separatedBy: .whitespaces).joined() ?? ""  // strip whitespace
         return "\(identifier)(\(inputSignature))\(outputSignature)"
     }
 }

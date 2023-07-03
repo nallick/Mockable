@@ -42,7 +42,8 @@ public enum Mock {
         }
 
         public func function(_ signature: String) -> FunctionTrace {
-            guard let functionTrace = trace[signature] else { fatalError("Invalid function signature: \(signature)") }
+            let strippedSignature = signature.components(separatedBy: .whitespaces).joined()  // strip whitespace
+            guard let functionTrace = trace[strippedSignature] else { fatalError("Invalid function signature: \(signature)") }
             return functionTrace
         }
     }
